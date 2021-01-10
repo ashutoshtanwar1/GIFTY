@@ -1,38 +1,118 @@
-.App {
+.App-header {
+  background-color: #000000;
+  min-height: 100vh;
+  padding: 3%;
+  font-family: "Cairo", sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+.header {
+  font-size: 72px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#search-box {
+  max-width: 60%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  border: 3px solid rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#customRange2 {
+  max-width: 3rem;
+}
+
+#type-sel {
+  padding-top: 3%;
+  font-size: 18px;
+}
+
+.masonry {
+  columns: 4;
+  column-gap: 16px;
+}
+
+.masonry .grid {
+  display: inline-block;
+  margin-bottom: 16px;
+  position: relative;
+}
+.masonry .grid:before {
+  border-radius: 5px;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.masonry .grid img {
+  width: 394px;
+  border-radius: 5px;
+}
+
+@media (max-width: 1200px) {
+  .masonry {
+    columns: 3;
+  }
+  .masonry .grid img {
+    width: 100%;
+    border-radius: 5px;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@media (max-width: 992px) {
+  .masonry {
+    columns: 2;
+  }
+  .masonry .grid img {
+    width: 100%;
+    border-radius: 5px;
+  }
+}
+@media (max-width: 794px) {
+  .masonry {
+    columns: 1;
+  }
+  .masonry .grid img {
+    width: 100%;
+    border-radius: 5px;
+  }
+}
+.masonry .grid-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0px 0px 10px 0px;
+}
+.masonry .grid-author {
+  font-size: 14px;
+  font-weight: 300;
+}
+.masonry .grid-link {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.masonry .grid-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 30px 30px;
+  color: #fff;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.grid:hover .grid-body {
+  visibility: visible;
+  opacity: 1;
 }
