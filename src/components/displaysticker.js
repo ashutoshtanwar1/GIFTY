@@ -14,6 +14,8 @@ const DisplaySticker = (props) => {
 
   const [finalArr, setFinalArr] = useState([]);
 
+  const [fixedWidth, setFixedWidth] = useState(0);
+
   const fetchTrendSticker = async (isAppendData) => {
     const res = await fetch(
       `https://api.giphy.com/v1/stickers/trending?api_key=FSPfNME2Zi5hVag5o7doCw8G9gtyVJGL&offset=${
@@ -49,6 +51,7 @@ const DisplaySticker = (props) => {
   // Fetch trending gifs for the first time
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", changeImageSize);
   }, []);
 
   // Fetch data whenever the props changes
@@ -98,6 +101,12 @@ const DisplaySticker = (props) => {
     else reorder(1);
   }, [arrSticker]);
 
+  const changeImageSize = () => {
+    if (window.outerWidth > 1200) setFixedWidth(390);
+    else if (window.outerWidth > 992) setFixedWidth(306);
+    else setFixedWidth(161);
+  };
+
   return (
     <div>
       <div
@@ -118,11 +127,12 @@ const DisplaySticker = (props) => {
                 <LazyLoadImage
                   key={i}
                   alt="..."
-                  height={val.images.original.height}
-                  visibleByDefault={true}
+                  height={
+                    (fixedWidth / val.images.original.width) *
+                    val.images.original.height
+                  }
                   src={val.images.original.url}
-                  width={val.images.original.width}
-                  delayTime={0}
+                  width={fixedWidth}
                 />
                 <div className="grid-body">
                   <div className="relative">
