@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import DisplayGIF from "./displaygif.js";
 import DisplaySticker from "./displaysticker.js";
 
@@ -11,16 +11,21 @@ function Search() {
 
   const [fetchQuery, setFetchQuery] = useState("");
 
-  const delayedQuery = useCallback(() => {
-    debounce((q) => setFetchQuery(q), 500);
-  }, []);
+  const delayedQuery = useCallback(
+    debounce((q) => setFetchQuery(q), 500),
+    []
+  );
 
   const onChange = (e) => {
     setUserQuery(
       e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
     );
-    delayedQuery(e.target.value);
+    delayedQuery(
+      e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
+    );
   };
+
+  useEffect(() => {}, [fetchQuery]);
 
   return (
     <div>

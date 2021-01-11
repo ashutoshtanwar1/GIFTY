@@ -6,7 +6,6 @@ importScripts(
 );
 
 if (workbox) {
-  console.log(`Boo! Workbox load 😬`);
   workbox.routing.registerRoute(
     ({ event }) =>
       event.request.destination === "script" ||
@@ -25,14 +24,12 @@ if (workbox) {
         }),
         new workbox.expiration.ExpirationPlugin({
           maxEntries: 200,
-          maxAgeSeconds: 24 * 60 * 60, // 1 Day
+          maxAgeSeconds: 2 * 24 * 60 * 60, // 2 Day
           purgeOnQuotaError: true,
         }),
       ],
     })
   );
-} else {
-  console.log(`Boo! Workbox didn't load 😬`);
 }
 
 workbox.core.setCacheNameDetails({ prefix: "gifty" });
