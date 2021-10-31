@@ -4,7 +4,7 @@ import Search from "./components/search";
 function App() {
   return (
     <div className="App-header">
-      <h1 className="header">GIFTY</h1>
+      <h1 className="header">GIFS</h1>
       <Search />
     </div>
   );
